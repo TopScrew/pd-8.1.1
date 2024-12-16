@@ -1,0 +1,54 @@
+run:
+  timeout: 3m
+linters:
+  enable:
+    - misspell
+    - stylecheck
+    - gocritic
+    - unparam
+    - unconvert
+    - whitespace
+    - makezero
+    - gosec
+    - bodyclose
+    - testifylint
+    - gofmt
+  disable:
+    - errcheck
+linters-settings:
+  gocritic:
+    # Which checks should be disabled; can't be combined with 'enabled-checks'; default is empty
+    disabled-checks:
+      - regexpMust
+      - appendAssign
+      - exitAfterDefer
+      - ifElseChain
+  gosec:
+    # To specify a set of rules to explicitly exclude.
+    # Available rules: https://github.com/securego/gosec#available-rules
+    excludes:
+      - G402
+      - G404
+      - G601
+  testifylint:
+    enable:
+      - bool-compare
+      - compares
+      - empty
+      - error-is-as
+      - error-nil
+      - expected-actual
+      - len
+      - require-error
+      - suite-dont-use-pkg
+      - suite-extra-assert-call
+    disable:
+      - float-compare
+      - go-require
+  gofmt:
+    # https://golangci-lint.run/usage/linters/#gofmt
+    # disable for faster check
+    simplify: false
+    rewrite-rules:
+      - pattern: "interface{}"
+        replacement: "any"
